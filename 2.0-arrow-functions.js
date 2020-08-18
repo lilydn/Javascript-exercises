@@ -45,7 +45,7 @@ const makeAbaby = (first,last) => ({name: `${first} ${last}`, age: 0});
 
 // ------------------------------ //
 
-//a function inside a property (תכונה) of an object - 3 different ways
+//a function inside a property of an object - 3 different ways
 const wes = {
     name: 'wes bos',
     sayHiLong: function () {
