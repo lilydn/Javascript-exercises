@@ -1,0 +1,61 @@
+<!-- Create a webpage that has some text and two buttons with ‘+’ and ‘-‘
+Clicking the ‘+’ button should increase the text’s font-size and clicking the ‘-‘ should decrease it.
+Limit the font size to be between 6px and 100px. -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>font-size</title>
+		<style>
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      button {
+        padding: 10px 15px ;
+      }
+			/* #text {
+				font-size: 8px;
+      } */
+		</style>
+	</head>
+
+	<body>
+		<p id="text">Change My Font Size 😃</p>
+		<div class="btn">
+			<button
+				id="btn_plus"
+				value="+"
+				type="button"
+				onclick="changeFontSize(this)">
+				+
+			</button>
+			<button
+				id="btn_minus"
+				value="-"
+				type="button"
+				onclick="changeFontSize(this)">
+				-
+			</button>
+		</div>
+
+		<script>
+			function changeFontSize(target) {
+          let currentFontSize = window.getComputedStyle(document.getElementById("text")).fontSize;
+          currentFontSize = parseInt(currentFontSize);
+          if (target.id === "btn_plus" && currentFontSize < 100) {
+            currentFontSize++;
+          } else if (target.id === "btn_minus" && currentFontSize > 6) {
+            currentFontSize--;
+          }
+          document.getElementById("text").style.fontSize = currentFontSize + "px";
+          console.log(currentFontSize);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- Create a webpage that has part of an application process for a job. This page should have a text area field and a button. Your user must enter at least 100 characters before clicking the button. If he didn’t, please give him the appropriate message. (using alert is forbidden) -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>text-area-limit</title>
+		<style>
+			* {
+				margin: 1px;
+			}
+
+			form {
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+
+			button {
+				padding: 5px 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form>
+			<p>Why are you interested in this position?</p>
+			<textarea id="text-area" cols="30" rows="10"></textarea>
+			<div id="error-message"></div>
+			<button id="btn_plus" type="button" onclick="check()">
+				Click Here!
+      </button> 
+		</form>
+
+		<script>
+			function check() {
+        let textAreaLen = document.getElementById("text-area").value.length;
+        let message = document.getElementById("error-message");
+        if (textAreaLen < 100) {
+          message.textContent = "must enter at least 100 characters";
+          message.style.color = "red";
+        }
+        else if(textAreaLen >= 100) {
+          message.textContent = "";
+        }
+			}
+		</script>
+	</body>
+</html>
+
+

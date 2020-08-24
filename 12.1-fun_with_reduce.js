@@ -1,28 +1,35 @@
 
-//1. max function using the reduce built-in function
+//1. max function using reduce 
 const findMax = arr => {
-    return arr.reduce = (accumulator, currentValue) => 
-    accumulator > currentValue ? accumulator : currentValue;
+    return arr.reduce((acc, current) => 
+    acc > current ? acc : current, 0);
 }
 
-let arr = [8,6,1,5,9,3];
+
+//2. sum of even numbers using reduce 
+const sumEven = arr => {
+    return arr.reduce((acc, current) =>
+    current % 2 ===0 ? acc + current : acc ,0);
+}
+
+
+
+//3. average function using reduce 
+const average = arr => {
+    return (arr.reduce((acc, current) =>
+    acc + current, 0))/arr.length;
+}
+
+
+
+
+
+
+
+/* - - - - - - - - - - - - - - - - - */
+
+let arr = [5,8,1,2,-10];
 console.log(findMax(arr));
+console.log(sumEven(arr));
+console.log(average(arr));
 
-// function minMax(items) {
-//     var minMaxArray = items.reduce(
-//        (accumulator, currentValue) => {
-//             return (accumulator < currentValue ? accumulator : currentValue);
-//        }
-//    );
-
-//     return minMaxArray;
-// }
-
-
-// const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-
-//2. sum of even numbers using the reduce built-in function
-
-
-//3. average function using the reduce built-in function
