@@ -1,0 +1,54 @@
+<!-- Create a webpage that has an image of a lightbulb.
+When the user clicks the lightbulb, it should be turned on, clicking it again
+will turn it off. -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>light-bulb</title>
+		<style>
+			body {
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+        flex-direction: column;
+			}
+      img {
+        cursor: pointer;
+        width: 250px;
+      }
+		</style>
+	</head>
+
+	<body>
+    <div>
+      <img class="bulb" src="https://i.imgur.com/GgEiEeh.png" alt="turned off bulb">
+    </div>
+
+
+	<script>
+    const img = document.querySelector(".bulb");
+    const off = 'https://i.imgur.com/GgEiEeh.png';
+    const on = 'https://i.imgur.com/2unEP2S.png';
+
+    img.addEventListener("click", (e) => {
+      console.log(e);
+      if(img.src === off) {
+        // img.src = on;
+        // img.alt = 'turned on bulb';
+        e.target.src = on;
+        e.target.alt = 'turned on bulb';
+      }
+      else if(img.src === on) {
+        // img.src = off;
+        // img.alt = 'turned off bulb';
+        e.target.src = off;
+        e.target.alt = 'turned off bulb';
+      }
+    });
+	</script>
+	</body>
+</html>

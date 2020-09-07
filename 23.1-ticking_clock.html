@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticking-Clock</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .clock-container {
+        font-size: 100px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Ticking Clock</h1>
+      <div class="clock-container">
+        <span class="clock"></span>
+      </div>
+    </div>
+
+    <script>
+      function updateClock() {
+        let currentTime = new Date();
+        let currentHours = currentTime.getHours();
+        let currentMinutes = currentTime.getMinutes();
+        let currentSeconds = currentTime.getSeconds();
+
+        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+        // create the string for display
+        let currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+
+        // update the time display
+        document.querySelector('.clock-container').firstChild.nodeValue = currentTimeString;
+      }
+
+      setInterval('updateClock()', 1000);
+
+    </script>
+
+
+  </body>
+</html>

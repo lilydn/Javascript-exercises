@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .stopwatch-container {
+        font-size: 90px;
+        font-weight: bold;
+      }
+      .btn {
+        width: 60px;
+        height: 60px;
+        margin: 20px 10px;
+        cursor: pointer;
+        opacity: 0.8;
+        border-color: slategrey;
+      }
+      .btn:hover{
+        opacity: 1;
+      }
+      #start {
+        background: url('https://w0.pngwave.com/png/572/428/computer-icons-symbol-circle-play-icon-png-clip-art.png') no-repeat center center/cover;
+      }
+      #pause {
+        background: url('https://w0.pngwave.com/png/243/16/button-computer-icons-pause-button-png-clip-art.png') no-repeat center center/cover;
+      }
+      #reset {
+        background: url('https://w0.pngwave.com/png/909/198/computer-icons-font-awesome-stop-button-png-clip-art.png') no-repeat center center/cover;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Stopwatch</h1>
+      <div class="stopwatch-container">
+      </div>
+      <div class="buttons-container">
+        <button class="btn" id="start"></button>
+        <button class="btn" id="pause"></button>
+        <button class="btn" id="reset"></button>
+      </div>
+    </div>
+
+
+    <script>
+      let stopwatchDisplay = document.querySelector('.stopwatch-container');
+      let start = document.querySelector('#start');
+      let pause = document.querySelector('#pause');
+      let reset = document.querySelector('#reset');
+      let running = false;
+      let min;
+      let sec;
+      let mlsec;
+
+      function initStopwatch() {
+        min = 0;
+        sec = 0;
+        mlsec = 0;
+        stopwatchDisplay.firstChild.nodeValue = '00:00:00';
+      }
+
+      function startStopwatch() {
+        if(!running) {
+          tInterval = setInterval(getShowTime, 10);
+          running = true; 
+        }
+      }
+
+      function getShowTime() {
+        mlsec = mlsec + 10;
+        if (mlsec > 999) {
+          mlsec = 0;
+          sec++;
+          if (sec > 59) {
+            sec = 0;
+            min++;
+          }
+        }        
+        updateStopwatchdisplay();
+      }
+
+      function updateStopwatchdisplay() {
+        mlsecCalc = Math.floor(mlsec/10);
+        stopwatchDisplay.firstChild.nodeValue = 
+          (min  ? 
+          (min > 9 ? min : "0" + min) 
+          : "00") + ":" + (sec ? (sec > 9 ? sec : "0" + sec) : "00") + ":" + (mlsecCalc > 9 ? mlsecCalc : "0" + mlsecCalc);
+      }
+
+      function pauseStopwatch() {
+        if(running) {
+          clearInterval(tInterval);
+          running = false;
+        }
+      }
+
+      function resetStopwatch() {
+        pauseStopwatch();
+        initStopwatch();
+      }
+
+      initStopwatch();
+      start.addEventListener('click',startStopwatch);
+      pause.addEventListener('click',pauseStopwatch);
+      reset.addEventListener('click',resetStopwatch);
+    </script>
+  </body>
+</html>

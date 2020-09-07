@@ -1,0 +1,150 @@
+<!-- Create a webpage that has a form (asks the user for its name, age and email
+  address) and when the user clicks submit, open a text window that writes all
+  the information and ask for his confirmation. If he clicks on the confirm
+  button, tell him “congratulations you successfully sent this form” if he clicks on
+  change information, give him the possibility to change the information and ask
+  again for his confirmation. -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>a form</title>
+		<style>
+			form, .modal{
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+        flex-direction: column;
+        font-family: Arial;
+			}
+      div {
+        display: flex;
+				align-items: center;
+      }
+      input, button {
+        margin: 5px;
+        padding: 5px 10px;
+      }
+      label {
+        width: 40px;
+        padding-right: 10px;
+      }
+      button {
+        cursor: pointer;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 27%;
+        left: 37%; 
+        width: 250px;
+        height: auto;
+        padding: 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 9999px rgba(79, 79, 79, 0.5);
+      }
+      section {
+        align-self: baseline;
+        margin-left: 15px;
+      }
+      .congrats {
+        color: salmon;
+      }
+      .active {
+        display: flex;
+      }
+      .inactive {
+        display: none;
+      }
+		</style>
+  </head>
+	<body>
+    <form name="signup">
+      <h2>Sign Up</h2>
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name="name">
+      </div>
+      <div>
+        <label for="age">Age</label>
+        <input type="text" name="age">
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" name="email">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="modal">
+      <h2>Confirm Information</h2>
+      <h2 class="congrats inactive">Congratulations you successfully sent this form!</h2>
+      <section>
+        <p>Name:&nbsp&nbsp<span class="name"></span></p>
+        <p>Age:&nbsp&nbsp<span class="age"></span></p>
+        <p>Email:&nbsp&nbsp<span class="email"></span></p>
+      </section>
+      <div class="buttons">
+        <button class="button-confirm">
+          Confirm
+        </button>
+        <button class="button-change">
+          Change Information
+        </button> 
+      </div>
+    </div>
+    
+	<script>
+    const signupForm = document.querySelector('[name="signup"]');
+    const modal = document.querySelector('.modal');
+
+    const viewName = document.querySelector('.modal .name');
+    const viewAge = document.querySelector('.modal .age');
+    const viewEmail = document.querySelector('.modal .email');
+
+    const inputName = document.querySelector('[name="name"]');
+    const inputAge = document.querySelector('[name="age"]');
+    const inputEmail = document.querySelector('[name="email"]');
+
+    const confirmBtn = document.querySelector('.button-confirm');
+    const changeBtn = document.querySelector('.button-change');
+
+    function submitInfo(e) {
+      event.preventDefault();
+
+      modal.classList.remove('inactive'); 
+      modal.classList.toggle('active'); 
+      signupForm.classList.remove('active'); 
+      signupForm.classList.toggle('inactive'); 
+
+      viewName.textContent = inputName.value;
+      viewAge.textContent = inputAge.value;
+      viewEmail.textContent = inputEmail.value;
+    }
+
+    function confirmInfo(e) {
+      const congrats = document.querySelector('.congrats');
+      congrats.classList.remove('inactive'); 
+      congrats.classList.toggle('active'); 
+      modal.children[0].classList.toggle('inactive');
+      modal.children[2].classList.toggle('inactive');
+      modal.children[3].classList.toggle('inactive');
+    }
+
+    function changeInfo(e) {
+      modal.classList.remove('active'); 
+      modal.classList.toggle('inactive'); 
+      signupForm.classList.remove('inactive'); 
+      signupForm.classList.toggle('active');
+    }
+
+    signupForm.addEventListener('submit', submitInfo);
+    confirmBtn.addEventListener('click', confirmInfo);
+    changeBtn.addEventListener('click', changeInfo);
+
+	</script>
+	</body>
+</html>

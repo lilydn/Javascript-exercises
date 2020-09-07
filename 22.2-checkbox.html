@@ -1,0 +1,74 @@
+<!-- Create a webpage that has a checkbox. If the checkbox is checked, make a
+photo appear. If it is not, make it disappear. -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>checkbox</title>
+		<style>
+      * {
+        margin: 3px;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+      }
+      input[type="checkbox"] {
+        margin: 10px;
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+      }
+      img {
+        width: 250px;
+      }
+      .active {
+        display: block;
+      }
+      .inactive {
+        display: none;
+      }
+		</style>
+  </head>
+	<body>
+    <h2>checkbox</h2>
+    <p>When it is checked a wild pokemon appears</p>
+    <p>Uncheck to make it disappear</p>
+    <input type="checkbox" name="checkbox">
+    <img class="pokemon-img" src="" alt="pokemon">
+
+    
+	<script>
+    const checkbox = document.querySelector('[name="checkbox"]');
+    const img = document.querySelector('.pokemon-img');
+    img.classList.toggle('inactive'); 
+
+    const handleCheck = (e) => {
+      if(e.target.checked) {
+        img.classList.remove('inactive'); 
+        img.classList.toggle('active');
+        img.src = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${generateRandomPokemon()}.png`;
+      }
+      else {
+        img.classList.remove('active'); 
+        img.classList.toggle('inactive');
+      }
+    }
+
+    function generateRandomPokemon() {
+      let pokemonNum = Math.floor(Math.random() * 600) + 1;
+      if(pokemonNum < 100) {
+        pokemonNum = `0${pokemonNum}`;
+      }
+      return pokemonNum;
+    }
+
+    checkbox.addEventListener('click', handleCheck);
+	</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>age</title>
+		<style>
+			body {
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+        flex-direction: column;
+			}
+
+			button, input[type="text"] {
+				padding: 5px 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+    <div>
+      <input class="user-input" type="text" placeholder="enter your age">
+      <button class="btn-submit" type="button">submit</button> 
+    </div>
+    <p class="message-appear"></p>
+
+	<script>
+    const btn = document.querySelector(".btn-submit");
+    const userInput = document.querySelector(".user-input");
+    const msg = document.querySelector(".message-appear");
+
+    btn.addEventListener("click", () => {
+      if(isNaN(userInput.value)) { //ignores if the input is not a number
+        msg.textContent = '';
+      }
+      else {
+        if(parseFloat(userInput.value) >= 18) {
+          msg.textContent = `you can drink 🍻`; 
+        } 
+        else {
+          msg.textContent = `you're too young 👶`; 
+        }
+      } 
+    });
+	</script>
+	</body>
+</html>
+
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Wars API</title>
+  <style>
+    table {
+      text-align: center;
+      border-collapse: collapse;
+    }
+    table, th, td, caption {
+      border: 1px solid rgb(128 128 128);
+      padding: 5px 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container"></div>
+
+  <script>
+    
+    const baseEndpoint = 'https://swapi.dev/api';   
+
+    async function fetchData(query) {
+      const res = await fetch(`${baseEndpoint}/${query}`);
+      const data = await res.json();
+      return data;
+    }
+
+    async function createPeopleArray() {
+      const starwarsPeopleArray = [];
+      for (let i = 1; i < 11; i++) {
+        const person = await fetchData(`people/${i}/`);
+        const personObj = {};
+        personObj.name = person.name;
+        personObj.height = person.height;
+        personObj.hair_color = person.hair_color;
+        personObj.homeworld = await createHomeworldObj(person.homeworld);
+        starwarsPeopleArray.push(personObj); 
+      }
+      return starwarsPeopleArray;
+    }
+
+    async function createHomeworldObj(homeworld) {
+      const planet = await fetchData(homeworld.substring(21));
+      const planetObj = {};
+      planetObj.name = planet.name;
+      planetObj.population = planet.population;
+      return planetObj;
+    }
+
+    function handleError() {
+        console.log('OH NO!');
+    }
+
+    async function drawTable() {
+      const dataArray = await createPeopleArray();
+      const table = document.createElement('table');
+      const header = table.createCaption();
+      header.textContent = 'Star Wars';
+      addHeaders(table, ['name','hair','height','planet name','planet population']);
+      addTableData(table, dataArray);
+      document.querySelector('.container').appendChild(table);
+    }
+
+    function addHeaders(table, keys) {
+      const row = table.insertRow();
+      for (let i = 0; i < keys.length; i++) {
+        const cell = row.insertCell();
+        cell.textContent = keys[i];
+      }
+    }
+
+    function addTableData(table, dataArray) {
+      for (let i = 0; i < dataArray.length; i++) {
+        const el = dataArray[i];
+        console.log(el);
+        const row = table.insertRow();
+        Object.values(el).forEach(val => {
+          if(typeof(val) === 'object') {
+            Object.values(val).forEach(planetVal => {
+              const cell = row.insertCell();
+              cell.textContent = planetVal;
+            });
+          }
+          else {
+            const cell = row.insertCell();
+            cell.textContent = val; 
+          }
+        });
+      }
+    }
+
+    drawTable();
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<ul>
+			<li>title 1</li>
+			<li class="start-here">title 2</li>
+			<li>
+				<ul>
+					<li>sub title 1</li>
+					<li>sub title 2</li>
+					<li>sub title 3</li>
+				</ul>
+			</li>
+			<li>title 3</li>
+		</ul>
+		<div>
+			<p>Hello World!</p>
+    </div>
+    
+    <script>
+      const start = document.querySelector('.start-here');
+      start.textContent = 'main title';  
+
+      const subtitle4 = document.createElement('li');
+      subtitle4.textContent = 'sub title 4';
+      start.nextElementSibling.firstElementChild.appendChild(subtitle4);
+
+      start.nextElementSibling.nextElementSibling.remove();
+
+      const htmlTag = start.parentElement.parentElement.parentElement;
+      htmlTag.firstElementChild.lastElementChild.textContent = 'Master Of The Dom';
+
+      start.parentElement.nextElementSibling.children[0].textContent = 'traverse methods are cool 😎' 
+    </script>
+	</body>
+</html>
