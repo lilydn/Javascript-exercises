@@ -1,7 +1,7 @@
 const readlineSync = require("readline-sync");
 const data = [
 	{
-		id: 0,
+	  id: 0,
 		title: "Grocery shopping",
 		isDone: false,
 	},
